@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "nodejs-goof"
+  links:
+    - url: https://dashboard.example.com
+      title: My Dashboard
+      icon: dashboard
+spec:
+  type: service
+  owner: lucianomori
+  lifecycle: production
+  system: lucianomori-application-goof
+  
