@@ -15,13 +15,11 @@ jobs:
       - name: Install Snyk CLI
         run: npm install -g snyk
 
-      - name: Configure AWS Region for Snyk
+      - name:  Authenticate Snyk CLI
         env:
           SNYK_API: https://app.snyk.io/api
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-      - name: Authenticate Snyk CLI
-        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+          run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
       - name: Run Snyk Code scan
         continue-on-error: true
