@@ -1,0 +1,28 @@
+name: Snyk Code Scan
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  snyk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Snyk CLI
+        run: npm install -g snyk
+
+      - name: Configure AWS Region for Snyk
+        env:
+          SNYK_API: https://app.snyk.io/api
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Authenticate Snyk CLI
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+
+      - name: Run Snyk Code scan
+        continue-on-error: true
+        run: snyk code test --severity-threshold=high
