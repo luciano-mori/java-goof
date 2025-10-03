@@ -27,4 +27,4 @@ jobs:
 
       - name: Run Snyk Code scan
         continue-on-error: true
-        run: snyk test --severity-threshold=low
+        run: snyk test --severity-threshold=low --all-projects
