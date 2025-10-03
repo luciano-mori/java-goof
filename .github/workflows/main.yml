@@ -24,3 +24,7 @@ jobs:
       - name: Run Snyk Code scan
         continue-on-error: true
         run: snyk code test --severity-threshold=low
+
+      - name: Run Snyk Code scan
+        continue-on-error: true
+        run: snyk test --severity-threshold=low
