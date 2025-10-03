@@ -1,4 +1,4 @@
-name: Snyk Code Scan
+name: Snyk SCA and SAST Scan
 
 on:
   push:
@@ -25,6 +25,6 @@ jobs:
         continue-on-error: true
         run: snyk code test --severity-threshold=low
 
-      - name: Run Snyk Code scan
+      - name: Run Snyk open source scan
         continue-on-error: true
         run: snyk test --severity-threshold=low --all-projects
