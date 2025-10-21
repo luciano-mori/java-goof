@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: '0 0 * * 0'  # Runs weekly on Sunday at midnight UTC
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   snyk:
@@ -28,3 +31,7 @@ jobs:
       - name: Run Snyk open source scan
         continue-on-error: true
         run: snyk test --severity-threshold=low --all-projects
+
+      - name: Run Snyk IaC scan
+        continue-on-error: true
+        run: snyk iac test --severity-threshold=low
