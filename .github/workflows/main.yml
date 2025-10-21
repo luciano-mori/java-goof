@@ -18,6 +18,9 @@ jobs:
       - name: Install Snyk CLI
         run: npm install -g snyk
 
+      - name: Install snyk-to-html # for reports
+        run: npm install -g snyk-to-html
+
       - name:  Authenticate Snyk CLI
         env:
           SNYK_API: https://app.snyk.io/api
@@ -26,12 +29,25 @@ jobs:
 
       - name: Run Snyk Code scan
         continue-on-error: true
-        run: snyk code test --severity-threshold=low
+        # run: snyk code test --severity-threshold=low
+        run: snyk code test --severity-threshold=low --json | snyk-to-html -o snyk-code-report.html || true
 
       - name: Run Snyk open source scan
         continue-on-error: true
-        run: snyk test --severity-threshold=low --all-projects
+        # run: snyk test --severity-threshold=low --all-projects
+        run: snyk test --severity-threshold=low --all-projects --json | snyk-to-html -o snyk-sca-report.html || true
 
       - name: Run Snyk IaC scan
         continue-on-error: true
-        run: snyk iac test --severity-threshold=low
+        # run: snyk iac test --severity-threshold=low 
+        run: snyk iac test --severity-threshold=low --json | snyk-to-html -o snyk-iac-report.html || true
+
+      - name: Upload Snyk HTML reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: snyk-reports
+          path: |
+            snyk-code-report.html
+            snyk-sca-report.html
+            snyk-iac-report.html
