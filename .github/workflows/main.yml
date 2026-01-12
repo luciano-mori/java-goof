@@ -21,7 +21,7 @@ jobs:
       - name: Install Snyk CLI
         run: npm install -g snyk
 
-      - name: Install snyk-to-html # for html reports
+      - name: Install snyk-to-html # for html reports uncomment snyk-to-html below
         run: npm install -g snyk-to-html
 
       - name:  Authenticate Snyk CLI
