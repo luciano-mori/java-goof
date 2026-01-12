@@ -1,7 +1,8 @@
 # DEMO: Snyk SCA and SAST Scan with HTML Report Generation
 # Each scan runs ONCE: saves JSON, displays results, generates HTML report
 
-name: name: Snyk SCA and SAST Scan + HTML report
+name: Snyk SCA and SAST Scan + HTML report
+
 
 on:
   push:
