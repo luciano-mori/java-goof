@@ -21,7 +21,7 @@ jobs:
       - name: Install Snyk CLI
         run: npm install -g snyk
 
-      - name: Install snyk-to-html # for html reports uncomment snyk-to-html below
+      - name: Install snyk-to-html # for html reports
         run: npm install -g snyk-to-html
 
       - name:  Authenticate Snyk CLI
@@ -32,11 +32,11 @@ jobs:
 
       - name: Run Snyk Code scan
         continue-on-error: true
-        run: snyk code test --severity-threshold=high # --json | snyk-to-html -o snyk-code-report.html #|| true
+        run: snyk code test --severity-threshold=low # --json | snyk-to-html -o snyk-code-report.html #|| true
 
       - name: Run Snyk open source scan
         continue-on-error: true
-        run: snyk test --severity-threshold=high --all-projects # --json | snyk-to-html -o snyk-sca-report.html  || true
+        run: snyk test --severity-threshold=low --all-projects # --json | snyk-to-html -o snyk-sca-report.html  || true
 
       - name: Upload Snyk HTML reports
         if: always()
