@@ -29,13 +29,11 @@ jobs:
 
       - name: Run Snyk Code scan
         continue-on-error: true
-        # run: snyk code test --severity-threshold=low
-        run: snyk code test --severity-threshold=low --json || true
+        run: snyk code test --severity-threshold=low --json | snyk-to-html -o snyk-code-report.html # || true
 
       - name: Run Snyk open source scan
         continue-on-error: true
-        # run: snyk test --severity-threshold=low --all-projects
-        run: snyk test --severity-threshold=low --all-projects --json|| true
+        run: snyk test --severity-threshold=low --all-projects --json | snyk-to-html -o snyk-sca-report.html # || true
 
       - name: Upload Snyk HTML reports
         if: always()
