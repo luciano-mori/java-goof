@@ -38,8 +38,9 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
-      - name: Resolve Maven dependencies
-        run: mvn dependency:resolve -DskipTests || true
+      - name: Resolve dependencies
+        run: mvn dependency:resolve -DskipTests || true  # npm install , dotnet restore, pip install, etc
+
 
       - name: Run Snyk Code scan
         continue-on-error: true
